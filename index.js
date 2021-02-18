@@ -15,8 +15,11 @@ Spanwgo.prototype = {
     return SPAWN('mongoimport', QUERY['import'](options).split(' '))
   },
 
-  'export': function (col) {
+  'export': function (col, file) {
     let options = col ? Object.assign({}, this.config, {'collection': col}) : this.config
+    if (file) {
+      options = Object.assign(options, {'file': file});
+    }
     return SPAWN('mongoexport', QUERY['export'](options).split(' '))
   },
 
